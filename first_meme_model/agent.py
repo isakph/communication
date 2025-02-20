@@ -4,11 +4,25 @@ import random
 from mesa import Agent, Model
 
 class MemeAgent(Agent):
-    def __init__(self, unique_id: int, model: Model, meme: str):
-        super().__init__(unique_id, model)
-        self.meme = meme
+    """
+    A MemeAgent requires a mesa.Model and a list of memes (strings).
+    """
+    def __init__(self, model: Model, memes: list[str]):
+        super().__init__(model)
+        self.memes: list[str] = memes
+        self.meme: str = self.random.choice(memes)
+        self.meme_id: int = self._find_meme_id()
 
-    
+
+    def _find_meme_id(self):
+        """
+        Helper method to track which meme an agent holds.
+        """
+        for n, m in enumerate(self.memes):
+            if m == self.meme:
+                self.meme_id = n
+
+
     def step(self):
         """
         Defines the step that an agent will take during a step.
@@ -16,8 +30,8 @@ class MemeAgent(Agent):
         """
         neighbors = self.model.grid.get_neighbors(self.unique_id, include_center=False)
         if neighbors:
-            neighbor_id = self.random.choice(neighbors)
-            neighbor_agent = self.model.schedule.agents[neighbor_id]
+            neighbor_id: int = self.random.choice(neighbors)
+            neighbor_agent: MemeAgent = self.model.schedule.agents[neighbor_id]
 
             # if there is a neighbor, try to get them to accept your meme:
             neighbor_agent.consider_new_meme(self.meme)
@@ -31,7 +45,7 @@ class MemeAgent(Agent):
         we can track how simple memes spread.
         """
         
-        def acceptance_probability(current_meme, incoming_meme, alpha=1):
+        def acceptance_probability(current_meme: str, incoming_meme: str, alpha=1):
             """
             A helper function that calculates the probability for accepting an incoming meme. 
             If the incoming string is a lot shorter than the current meme, the probability
@@ -46,3 +60,15 @@ class MemeAgent(Agent):
 
         if random.random() < p:
             self.meme = incoming_meme
+            self.meme_id = self._find_meme_id()
+
+
+if __name__ == "__main__":
+    """
+    Just checking for stupid bugs
+    """
+    memes = ["asdf", "a", "asdfasdf"]
+    model = Model()
+    agent_1 = MemeAgent(model, memes)
+    agent_2 = MemeAgent(model, memes)
+    agent_1.consider_new_meme(memes[2])
