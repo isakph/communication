@@ -23,15 +23,14 @@ class MemeAgent(Agent):
                 self.meme_id = n
 
 
-    def step(self):
+    def spread_meme(self):
         """
         Defines the step that an agent will take during a step.
         For now, let's stick with one action on a random neighbour.
         """
         neighbors = self.model.grid.get_neighbors(self.unique_id, include_center=False)
         if neighbors:
-            neighbor_id: int = self.random.choice(neighbors)
-            neighbor_agent: MemeAgent = self.model.schedule.agents[neighbor_id]
+            neighbor_agent = self.random.choice(neighbors)
 
             # if there is a neighbor, try to get them to accept your meme:
             neighbor_agent.consider_new_meme(self.meme)
@@ -50,6 +49,7 @@ class MemeAgent(Agent):
             A helper function that calculates the probability for accepting an incoming meme. 
             If the incoming string is a lot shorter than the current meme, the probability
             for accepting the meme will approach 1.
+            TODO: Seems to be something wrong here.
             """
             L_c = len(current_meme)
             L_i = len(incoming_meme)

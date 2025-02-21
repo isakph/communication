@@ -41,11 +41,11 @@ class MemeModel(Model):
             # It will be something to do with self.agents, but I'm not quite clear on what.
         )
 
-        print(self.datacollector.collect(self))
-        # print(len(self.agents)) # correctly prints '100'
 
     def step(self):
-        ...
+        self.datacollector.collect(self)
+        self.agents.shuffle_do("spread_meme") # not sure if do() or shuffle_do() makes more sense
+        
 
     @staticmethod
     def generate_meme(lower_bound: int = 1, upper_bound: int = 100):
