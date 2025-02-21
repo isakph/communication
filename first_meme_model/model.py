@@ -35,7 +35,7 @@ class MemeModel(Model):
 
         # TODO: This doesn't work or do anything
         self.datacollector = DataCollector(
-            {f"meme{n}": lambda m: sum([1 for a in m.agents if a.meme == memes[n]]) / m.num_agents for n in range(len(memes))},
+            model_reporters = {f"meme{n}": lambda m: sum([1 for a in m.agents if a.meme == memes[n]]) / m.num_agents for n in range(len(memes))}
             # {"agent_count": lambda m: len(m.agents)}
             # TODO: here, m.schedule.agents no longer works, because I changed the code above. Figure out what to replace it with.
             # It will be something to do with self.agents, but I'm not quite clear on what.
@@ -43,6 +43,9 @@ class MemeModel(Model):
 
         print(self.datacollector.collect(self))
         # print(len(self.agents)) # correctly prints '100'
+
+    def step(self):
+        ...
 
     @staticmethod
     def generate_meme(lower_bound: int = 1, upper_bound: int = 100):
