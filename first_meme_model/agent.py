@@ -42,6 +42,7 @@ class MemeAgent(Agent):
         One hypothesis is that simpler memes should be accepted with a given probability.
         If most memes start out being rather long and complex,
         we can track how simple memes spread.
+        TODO: Seems to be something wrong here, figure it out
         """
         
         def acceptance_probability(current_meme: str, incoming_meme: str, alpha=1):
@@ -49,7 +50,6 @@ class MemeAgent(Agent):
             A helper function that calculates the probability for accepting an incoming meme. 
             If the incoming string is a lot shorter than the current meme, the probability
             for accepting the meme will approach 1.
-            TODO: Seems to be something wrong here.
             """
             L_c = len(current_meme)
             L_i = len(incoming_meme)
