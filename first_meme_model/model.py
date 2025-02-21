@@ -42,7 +42,7 @@ class MemeModel(Model):
         )
 
         print(self.datacollector.collect(self))
-        print(len(self.agents))
+        # print(len(self.agents)) # correctly prints '100'
 
     @staticmethod
     def generate_meme(lower_bound: int = 1, upper_bound: int = 100):
