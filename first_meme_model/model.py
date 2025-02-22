@@ -35,7 +35,14 @@ class MemeModel(Model):
 
         # TODO: This doesn't work or do anything
         self.datacollector = DataCollector(
-            model_reporters = {f"meme{n}": lambda m: sum([1 for a in m.agents if a.meme == memes[n]]) / m.num_agents for n in range(len(memes))}
+            # model_reporters = {f"meme{n}": lambda m: sum([1 for a in m.agents if a.meme == memes[n]]) / m.num_agents for n in range(len(memes))}
+            # model_reporters = {memes[n]: lambda m: sum([1 for a in m.agents if a.meme == memes[n]]) / m.num_agents for n in range(len(memes))}
+            model_reporters = {
+                memes[0]: lambda m: sum([1 for a in m.agents if a.meme == memes[0]]) / m.num_agents, 
+                memes[1]: lambda m: sum([1 for a in m.agents if a.meme == memes[1]]) / m.num_agents, 
+                memes[2]: lambda m: sum([1 for a in m.agents if a.meme == memes[2]]) / m.num_agents, 
+                memes[3]: lambda m: sum([1 for a in m.agents if a.meme == memes[3]]) / m.num_agents
+            }
             # {"agent_count": lambda m: len(m.agents)}
             # TODO: here, m.schedule.agents no longer works, because I changed the code above. Figure out what to replace it with.
             # It will be something to do with self.agents, but I'm not quite clear on what.
@@ -45,10 +52,10 @@ class MemeModel(Model):
     def step(self):
         self.datacollector.collect(self)
         self.agents.shuffle_do("spread_meme") # not sure if do() or shuffle_do() makes more sense
-        
+
 
     @staticmethod
-    def generate_meme(lower_bound: int = 1, upper_bound: int = 100):
+    def generate_meme(lower_bound: int = 1, upper_bound: int = 10):
         """
         Generates a random string of letters and digits with a random length
         in the interval given as lower and upper bounds.

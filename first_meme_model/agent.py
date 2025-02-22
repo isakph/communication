@@ -42,9 +42,13 @@ class MemeAgent(Agent):
         One hypothesis is that simpler memes should be accepted with a given probability.
         If most memes start out being rather long and complex,
         we can track how simple memes spread.
-        TODO: Seems to be something wrong here, figure it out
+        TODO: Make the interaction more complex. Implement, e.g., confidence? Let's say
+        confidence rises when you meet somebody with the same meme, and that confidence
+        impacts both acceptance and how persuasive you are. 
         """
-        
+
+        assert(isinstance(incoming_meme, str))
+
         def acceptance_probability(current_meme: str, incoming_meme: str, alpha=1):
             """
             A helper function that calculates the probability for accepting an incoming meme. 
@@ -59,8 +63,11 @@ class MemeAgent(Agent):
         p = acceptance_probability(self.meme, incoming_meme)
 
         if random.random() < p:
+            # print(f"changed opinion! replaced {self.meme} by {incoming_meme}") # seems to work
             self.meme = incoming_meme
             self.meme_id = self._find_meme_id()
+            return True
+        return False
 
 
 if __name__ == "__main__":

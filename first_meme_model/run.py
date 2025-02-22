@@ -5,11 +5,13 @@ from model import MemeModel
 
 model = MemeModel(seed=2154651)
 
-for _ in range(100):
+for _ in range(10):
     model.step()
 
 data = model.datacollector.get_model_vars_dataframe()
 print(data)
+# for agent in model.agents:
+#     print(agent.meme)
 # g = sns.lineplot(data=data) # TODO: Visualisation
 
 # if __name__ == "__main__":
