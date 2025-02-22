@@ -37,15 +37,13 @@ class MemeModel(Model):
         self.datacollector = DataCollector(
             # model_reporters = {f"meme{n}": lambda m: sum([1 for a in m.agents if a.meme == memes[n]]) / m.num_agents for n in range(len(memes))}
             # model_reporters = {memes[n]: lambda m: sum([1 for a in m.agents if a.meme == memes[n]]) / m.num_agents for n in range(len(memes))}
+            # TODO: Make the dict constructor work so that I can have an arbitrary no. of memes
             model_reporters = {
                 memes[0]: lambda m: sum([1 for a in m.agents if a.meme == memes[0]]) / m.num_agents, 
                 memes[1]: lambda m: sum([1 for a in m.agents if a.meme == memes[1]]) / m.num_agents, 
                 memes[2]: lambda m: sum([1 for a in m.agents if a.meme == memes[2]]) / m.num_agents, 
                 memes[3]: lambda m: sum([1 for a in m.agents if a.meme == memes[3]]) / m.num_agents
             }
-            # {"agent_count": lambda m: len(m.agents)}
-            # TODO: here, m.schedule.agents no longer works, because I changed the code above. Figure out what to replace it with.
-            # It will be something to do with self.agents, but I'm not quite clear on what.
         )
 
 
