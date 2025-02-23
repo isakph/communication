@@ -17,6 +17,7 @@ class MemeAgent(Agent):
     def _find_meme_id(self):
         """
         Helper method to track which meme an agent holds.
+        TODO: Consider whether this is needed. 
         """
         for n, m in enumerate(self.memes):
             if m == self.meme:
