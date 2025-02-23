@@ -3,9 +3,9 @@ import seaborn as sns
 from model import MemeModel
 # from server import server # I'll figure this stuff out later
 
-model = MemeModel(seed=2154651)
+model = MemeModel(seed=2154651, meme_number=10)
 
-for _ in range(10):
+for _ in range(20):
     model.step()
 
 data = model.datacollector.get_model_vars_dataframe()
