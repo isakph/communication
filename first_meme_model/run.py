@@ -1,5 +1,6 @@
+from pandas import DataFrame
+
 from model import MemeModel
-from server import server # I'll figure this stuff out later
 
 
 def run_model(
@@ -10,15 +11,14 @@ def run_model(
         MEME_LOWER_BOUND: int = 4,
         MEME_UPPER_BOUND: int = 10,
         steps: int = 20
-) -> None:
+) -> DataFrame:
     """
     Runs a simple model of how memes can spread through a social network. 
     The network is a random graph. 
     The probability for an agent to accept an incoming meme depends on the length of the 
     memes involved, where the shorter meme has a higher chance, and p = 0.5 if equal length.
 
-    When the simulation is over, the method calls print() to print the DataFrame containing
-    the data of the model.
+    When the simulation is over, the DataFrame containing the data of the model is returned.
 
     Args: 
         N (int): the no. of agents.
@@ -34,9 +34,9 @@ def run_model(
         model.step()
 
     data = model.datacollector.get_model_vars_dataframe()
-    print(data)
-
+    return data
 
 
 if __name__ == "__main__":
-    run_model()
+    data = run_model()
+    print(data)
