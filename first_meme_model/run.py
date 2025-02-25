@@ -1,14 +1,42 @@
 from model import MemeModel
 from server import server # I'll figure this stuff out later
 
-model = MemeModel(seed=2154651, meme_number=10)
 
-for _ in range(20):
-    model.step()
+def run_model(
+        N: int = 100,
+        seed: int = 2154651,
+        p: float = 0.2,
+        meme_number: int = 4,
+        MEME_LOWER_BOUND: int = 4,
+        MEME_UPPER_BOUND: int = 10,
+        steps: int = 20
+) -> None:
+    """
+    Runs a simple model of how memes can spread through a social network. 
+    The network is a random graph. 
+    The probability for an agent to accept an incoming meme depends on the length of the 
+    memes involved, where the shorter meme has a higher chance, and p = 0.5 if equal length.
 
-data = model.datacollector.get_model_vars_dataframe()
-print(data)
+    When the simulation is over, the method calls print() to print the DataFrame containing
+    the data of the model.
 
-# if __name__ == "__main__":
-#     server.port = 8521  # or any open port
-#     server.launch()
+    Args: 
+        N (int): the no. of agents.
+        seed (int): the seed for the random methods of the model.
+        p (float): the probability of two nodes being connected in the random graph.
+        meme_number (int): the no. of memes.
+        MEME_LOWER_BOUND (int): the lower bound for the length of a meme.
+        MEME_UPPER_BOUND (int): the upper bound for the length of a meme. 
+    """
+    model = MemeModel(N, seed, p, meme_number, MEME_LOWER_BOUND, MEME_UPPER_BOUND)
+
+    for _ in range(steps):
+        model.step()
+
+    data = model.datacollector.get_model_vars_dataframe()
+    print(data)
+
+
+
+if __name__ == "__main__":
+    run_model()

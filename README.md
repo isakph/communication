@@ -6,3 +6,6 @@ Later on, a desideratum is to model advanced things like Niklas Luhmann's concep
 We will see, though. 
 
 Since the law is a social system according to this view, I will also look into how I can simulate legal interactions and the like. 
+
+For now though, this is some stuff that I did to test my concentration for short periods of time while on sick leave with a concussion ...
+bloody concussions ...
