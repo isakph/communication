@@ -49,7 +49,13 @@ if __name__ == "__main__":
     MEME_LOWER_BOUND = 4
     MEME_UPPER_BOUND = 6
 
-    data = run_model(N=N, meme_number=meme_number, steps=steps, MEME_UPPER_BOUND=MEME_UPPER_BOUND)
+    data = run_model(N=N,
+            seed=seed,
+            p=p,
+            meme_number=meme_number,
+            steps=steps,
+            MEME_UPPER_BOUND=MEME_UPPER_BOUND
+    )
     # print(data)
     plot = sns.lineplot(data=data)
     plot.legend(loc="center right", bbox_to_anchor=(1.25, 0.5), ncol=1)
