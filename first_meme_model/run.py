@@ -1,4 +1,7 @@
+import os
+
 from pandas import DataFrame
+import seaborn as sns
 
 from model import MemeModel
 
@@ -38,5 +41,25 @@ def run_model(
 
 
 if __name__ == "__main__":
-    data = run_model()
-    print(data)
+    N = 1000
+    seed = 44123412
+    p = 0.2
+    meme_number = 15
+    steps = 1000
+    MEME_LOWER_BOUND = 4
+    MEME_UPPER_BOUND = 6
+
+    data = run_model(N=N, meme_number=meme_number, steps=steps, MEME_UPPER_BOUND=MEME_UPPER_BOUND)
+    # print(data)
+    plot = sns.lineplot(data=data)
+    plot.legend(loc="center right", bbox_to_anchor=(1.25, 0.5), ncol=1)
+    figure = plot.get_figure()
+
+    directory = "first_meme_model/graphs"
+    filename_base = "meme_simulation"
+    files = os.listdir(directory)
+
+    figure.savefig(
+        f"{directory}/{filename_base}{(len(files)+1):03}_N={N}_meme_no={meme_number}_steps={steps}.png",
+        bbox_inches="tight"
+    )
