@@ -13,3 +13,4 @@ bloody concussions ...
 ## Future Ideas
 - Implement a form of [information uncertainty](https://psycnet.apa.org/record/2012-00550-001)
 - [Let LLMs infer symbolic cognitive models of human behaviour](https://www.biorxiv.org/content/10.1101/2025.02.05.636732v1) and use these models in an anticipatory system *vel sim.*
+Compare [this paper](https://arxiv.org/abs/2502.00879).
