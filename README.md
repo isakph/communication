@@ -9,3 +9,7 @@ Since the law is a social system according to this view, I will also look into h
 
 For now though, this is some stuff that I did to test my concentration for short periods of time while on sick leave with a concussion ...
 bloody concussions ...
+
+## Future Ideas
+- Implement a form of [information uncertainty](https://psycnet.apa.org/record/2012-00550-001)
+- [Let LLMs infer symbolic cognitive models of human behaviour](https://www.biorxiv.org/content/10.1101/2025.02.05.636732v1) and use these models in an anticipatory system *vel sim.*
